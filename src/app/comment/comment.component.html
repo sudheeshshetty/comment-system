@@ -1,0 +1,47 @@
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="comment-box">Enter Comment</label>
+      <textarea class="form-control" id="comment-box" rows=3 name="comment" [(ngModel)]="userComment"></textarea>
+    </div>
+  </form>
+  <button type="button" class="btn btn-outline-primary float-right" (click)="writeComment()">Comment</button>
+  
+  <div class="comment-display">
+
+    <div class="list-group" *ngFor="let comment of allComments">
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"></h5>
+          <small><a (click)="deleteComment(comment._id)">
+              delete
+          </a></small>
+        </div>
+        <p class="mb-1">{{comment.value}}</p>
+        
+        <small>
+          <a (click)="doReply(comment._id)">reply</a>
+          <div class="list-group" *ngFor="let reply of allReplies">
+            <div *ngIf="reply.replyto==comment._id">
+              <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"></h5>
+                    <small><a (click)="deleteComment(reply._id)">delete</a></small>
+                  </div>
+                  <p class="mb-1">{{reply.value}}</p>
+              </a>
+            </div>
+          </div>
+
+          <form>
+              <div class="form-group" *ngIf="replyValue==comment._id">
+                <input type="text" class="form-control" aria-describedby="emailHelp" name="reply" [(ngModel)]="replyData" >
+                <small id="emailHelp" class="form-text text-muted"><a (click)="reply(comment._id)">reply</a></small>
+              </div>
+          </form>
+        </small>
+        
+      </a>
+    </div>
+  </div>
+</div>

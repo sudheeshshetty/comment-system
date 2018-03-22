@@ -1,0 +1,10 @@
+textarea{
+    resize: none;
+}
+.comment-display{
+    clear: both;
+    padding-top:10px;
+}
+.list-group{
+    padding-top:10px;
+}
